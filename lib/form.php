@@ -33,8 +33,12 @@
         }
     }
     
+    if( ( empty($_POST['name']) && !empty($_POST['passwd']) ) || ( !empty($_POST['name']) && empty($_POST['passwd']) ) ){
+        $error = 1;
+    }
+    
     if( $error == 1 ){
-        echo "<div class='error'>El usuario o contraseña no coinciden</div>";
+        echo "<div class='error'>El usuario o contraseña no coinciden</div><br>";
     }
 ?>
 <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
