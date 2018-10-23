@@ -2,10 +2,10 @@
     include '../lib/header.php';
     
     if( isset($_POST['logout']) ){
-        setcookie('name', "", time()-60, "/");
-        setcookie('passwd', "", time()-60, "/");
-        setcookie('name2', "", time()-60, "/");
-        setcookie('passwd2', "", time()-60, "/");
+        setcookie('name', "", time()-60, "/A2");
+        setcookie('passwd', "", time()-60, "/A2");
+        setcookie('name2', "", time()-60, "/A2");
+        setcookie('passwd2', "", time()-60, "/A2");
         header('Location: ../index.php');
     }
     

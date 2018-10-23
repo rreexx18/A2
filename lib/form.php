@@ -1,32 +1,34 @@
 <?php
      
     $JsonFileContent = file_get_contents("data/dades.json");
-    $array = json_decode($JsonFileContent, true);
+    $file = json_decode($JsonFileContent, true);
     
     $error = 0;
     
-     if( isset($_POST["save"]) && !empty($_POST["name"]) && !empty($_POST["passwd"]) ){
+    if( isset($_COOKIE['name']) && isset($_COOKIE['passwd']) ){
+        header('Location: pages/home.php');
+    }
+    
+    if( isset($_POST["save"]) && !empty($_POST["name"]) && !empty($_POST["passwd"]) ){
         
-        if( $array[0]['name'] == $_POST['name'] && $array[0]['passwd'] == $_POST['passwd'] ){
-            setcookie('name', $_POST['name'], time()+600, "/");
-            setcookie('passwd', $_POST['passwd'], time()+600, "/");
+        if( $file[0]['name'] == $_POST['name'] && $file[0]['passwd'] == $_POST['passwd'] ){
+            setcookie('name', $_POST['name'], time()+600, "/A2");
+            setcookie('passwd', $_POST['passwd'], time()+600, "/A2");
             setcookie('time', time(), time()+600);
             $_SESSION['name'] = $_POST['name'];
             $_SESSION['passwd'] = $_POST['passwd'];
             
-            if( isset($_COOKIE['name']) && isset($_COOKIE['passwd']) ){
-                header('Location: pages/home.php');
-            }
+            header('Location: pages/home.php');
         }else{
             $error = 1;
         }
-     }
+    }
      
-    if( !empty($_POST["name"]) && !empty($_POST["passwd"]) ){
+    if( !empty($_POST["name"]) && !empty($_POST["passwd"]) && !isset($_POST["save"]) ){
          
-        if( $array[0]['name'] == $_POST['name'] && $array[0]['passwd'] == $_POST['passwd'] ){
-            setcookie('name2', $_POST['name'], time()+600, "/");
-            setcookie('passwd2', $_POST['passwd'], time()+600, "/");
+        if( $file[0]['name'] == $_POST['name'] && $file[0]['passwd'] == $_POST['passwd'] ){
+            setcookie('name2', $_POST['name'], time()+600, "/A2");
+            setcookie('passwd2', $_POST['passwd'], time()+600, "/A2");
             $_SESSION['name'] = $_POST['name'];
             $_SESSION['passwd'] = $_POST['passwd'];
             header('Location: pages/home.php');
